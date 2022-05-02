@@ -1,49 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-function App() {
-
-  const [tick,setTick] = useState(0);
-
-
-  setInterval(function(){ 
-    const t = tick;
-    axios.post('http://10.23.0.138:5000/api/product/create',{"t":t})
-          .then(function (response) {
-            // console.log(response);
-            setTick(response.data.tick);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-    
-}, 5000);
+import React from 'react';
+import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './screens/HomeScreen';
+import TestScreen from './screens/TestScreen';
+import LoginScreen from './screens/LoginScreen';
 
 
+const Stack = createStackNavigator();
 
-  useEffect(() => {
-
-
-  });
-
-
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>{tick}</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator >
+      <Stack.Screen name="Test" component={TestScreen} />
+      <Stack.Screen name="LogIn" component={LoginScreen} />        
+      <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-export default App
