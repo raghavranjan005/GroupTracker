@@ -10,14 +10,14 @@ function App() {
 
   setInterval(function(){ 
     const t = tick;
-    axios.post('http://10.23.0.138:5000/api/product/create',{"t":t})
-          .then(function (response) {
-            // console.log(response);
-            setTick(response.data.tick);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
+    // axios.post('http://10.23.0.138:5000/api/user/test',{"t":t})
+    //       .then(function (response) {
+    //         // console.log(response);
+    //         setTick(response.data.tick);
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       })
     
 }, 5000);
 
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{tick}</Text>
+      <Text>dddd</Text>
       <StatusBar style="auto" />
     </View>
   );
