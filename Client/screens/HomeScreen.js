@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {Input, Button} from 'react-native-elements';
 
-
 const HomeScreen = ({navigation})=> {
 
   const [tick,setTick] = useState(0);
@@ -85,8 +84,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
-    padding: "5%" 
-  }
+    width: 200,
+    marginTop: 10
+}
 });
 
 export default HomeScreen
