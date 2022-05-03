@@ -4,10 +4,26 @@ import {Input, Button} from 'react-native-elements';
 import axios from 'axios';
 
 
-const JoinGroupScreen = ({navigation}) => {
+const JoinGroupScreen = ({navigation,route}) => {
+
+    const user = route.params.user;
     const [groupCode, setGroupCode] = useState('');
+    const [flag, setFlag] = useState(false)
+
     const joinGroup = () =>{
-        navigation.replace('Home');
+        axios.post('http://10.23.0.138:5000/api/group/join',{
+            groupId:groupCode,
+            _id:user._id
+        })
+          .then(function (response) {
+            if(response.data.flag===true){
+                console.log(response.data);
+                setFlag(true);
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
     }
     return (
         <View style={styles.container}>
@@ -19,7 +35,13 @@ const JoinGroupScreen = ({navigation}) => {
                 onChangeText={text => setGroupCode(text)}
             />
             <Button title="Join Group" style={styles.button} onPress = {joinGroup} />
+
+            {flag == true ? <View style={styles.container}>
+                <Text> Joined Group Succesfully</Text>
+            </View>:null}
+
         </View>
+        
     );
 }
 

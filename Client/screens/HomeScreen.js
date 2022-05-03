@@ -3,9 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 
-const HomeScreen = ({navigation})=> {
+const HomeScreen = ({navigation, route})=> {
 
+  console.log(route.params);
+  const user = route.params.user;
   const [tick,setTick] = useState(0);
 
 
@@ -21,7 +24,13 @@ const HomeScreen = ({navigation})=> {
 // //           })
     
 // // }, 5000);
+  var createGrp = () => {
+    navigation.replace('CreateGroup',{user:user});
+  }
 
+  var joinGrp = () => {
+    navigation.replace('JoinGroup',{user:user});
+  }
 
 
   useEffect(() => {
@@ -33,6 +42,8 @@ const HomeScreen = ({navigation})=> {
   return (
     <View style={styles.container}>
       <Text>home</Text>
+      <Button title="Create Group" style={styles.button} onPress = {createGrp}></Button>
+      <Button title="Join Group"style={styles.button} onPress = {joinGrp}></Button>
       <StatusBar style="auto" />
     </View>
   );
@@ -45,6 +56,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    width: 200,
+    marginTop: 10
+}
 });
 
 export default HomeScreen

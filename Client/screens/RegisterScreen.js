@@ -16,7 +16,7 @@ const RegisterScreen = ( {navigation} ) => {
         })
           .then(function (response) {
             if(response.data.flag===true){
-                navigation.replace('Home');
+                navigation.replace('Home',{user: response.data.user});
             }
           })
           .catch(function (error) {
@@ -52,13 +52,8 @@ const RegisterScreen = ( {navigation} ) => {
                 placeholder='Enter your phone number'
                 label='Phone Number'
                 leftIcon={{ type: 'material', name: 'phone' }}
-<<<<<<< HEAD
-                value={phoneNumber}
-                onChangeText={text => setPhoneNumber(text)}
-=======
                 value={mobile}
                 onChangeText={text => setMobile(text)}
->>>>>>> ecf80a9661aaa1bb18640c36faf701d9b046d2b8
             />
             <Button title="register" style={styles.button} onPress = {register} />
         </View>

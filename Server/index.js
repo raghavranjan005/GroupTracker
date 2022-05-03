@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoutes")
+const groupRoute = require("./routes/groupRoutes")
 
 
 const app = express()
@@ -18,6 +19,7 @@ mongoose.connect(mongodbUrl, {
 }).catch((error)=> console.log(error));
 
 app.use('/api/user', userRoute);
+app.use('/api/group', groupRoute);
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
