@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
 const groupSchema = new mongoose.Schema({
-    id:{type:String},
+    groupId:{type:String},
     name:{type:String},
-    members:[{type: mongoose.Schema.Types.ObjectId}],
+    members:[],
 })
 
 const groupModel = mongoose.model("Group", groupSchema);
