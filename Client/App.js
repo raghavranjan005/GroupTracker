@@ -8,6 +8,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import JoinGroupScreen from './screens/JoinGroupScreen';
 import CreateGroupScreen from './screens/CreateGroupScreen';
+import StartTrackingScreen from './screens/StartTrackingScreen';
+import TrackingScreen from './screens/TrackingScreen';
 
 
 const Stack = createStackNavigator();
@@ -16,12 +18,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator >
+      <Stack.Screen name="StartTracking" component={StartTrackingScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="LogIn" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />  
-      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="JoinGroup" component={JoinGroupScreen} />
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       <Stack.Screen name="Test" component={TestScreen} />
+      <Stack.Screen name="Tracking" component={TrackingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

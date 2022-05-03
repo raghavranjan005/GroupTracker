@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import {Input, Button} from 'react-native-elements';
 
 const HomeScreen = ({navigation, route})=> {
 
