@@ -3,7 +3,8 @@ import { View, StyleSheet, Text } from 'react-native'
 import {Input, Button} from 'react-native-elements';
 import axios from 'axios';
 
-const TrackingScreen = ({navigation}) => {
+const StartTrackingScreen = ({navigation}) => {
+    const [safetyDistance, setSafetyDistance] = useState('');
     const members = [
         {
           id: "1",
@@ -26,10 +27,17 @@ const TrackingScreen = ({navigation}) => {
           name: "Michelle Dare",
         },
       ];
-
     return (
         <View style={styles.container}>
-            <Text>Tracking Screen</Text>
+            <Text>Group Name</Text>
+            <Input
+                placeholder='Enter Safety Distance'
+                label='Safety Distance'
+                // leftIcon={{ type: 'material', name: 'name' }}
+                value={safetyDistance}
+                onChangeText={text => setSafetyDistance(text)}
+            />
+            <Button title="Start Tracking" style={styles.button} onPress= {()=>navigation.navigate('Tracking')}/>
             {members.map((member) => {
                 return (
                 <View>
@@ -58,4 +66,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default TrackingScreen;
+export default StartTrackingScreen;

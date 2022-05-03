@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import {Input, Button} from 'react-native-elements';
 
 const HomeScreen = ({navigation})=> {
 
@@ -33,6 +34,8 @@ const HomeScreen = ({navigation})=> {
   return (
     <View style={styles.container}>
       <Text>home</Text>
+      {/* <Button title="Create Group" style={styles.button} onPress = {()=>navigation.navigate('CreateGroup')} />
+      <Button title="Join Group" style={styles.button} onPress= {()=>navigation.navigate('JoinGroup')}/> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -45,6 +48,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    width: 200,
+    marginTop: 10
+}
 });
 
 export default HomeScreen
