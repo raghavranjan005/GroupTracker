@@ -54,6 +54,7 @@ router.post('/register', async (req, res) => {
         if (signinUser) {
           if (bcrypt.compareSync(req.body.password, signinUser.password)) {          
             return res.send({
+              flag:true,
             _id: signinUser.id,
             name: signinUser.name,
             email: signinUser.email,

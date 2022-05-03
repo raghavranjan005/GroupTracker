@@ -2,39 +2,26 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, {useState} from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import {Input, Button} from 'react-native-elements';
+import axios from 'axios';
 
 const RegisterScreen = ( {navigation} ) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [mobile, setMobile] = useState('');
 
     var register = () => {
-    //   auth.createUserWithEmailAndPassword( email, password)
-    //   .then((userCredential) => {
-    //     // Signed in 
-    //     var user = userCredential.user;
-    //     user.updateProfile(auth.currentUser, {
-    //       displayName: name , 
-    //       photoURL: imageURL?imageURL:
-    //      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-
-    //     }).then(() => {
-    //       // Profile updated!
-    //       // ...
-    //     }).catch((error) => {
-    //       // An error occurred
-    //       // ...
-    //     }); 
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     var errorMessage = error.message;
-    //     alert(errorMessage)
-    //     // ..
-    //   });
-    //   navigation.popToTop();
-    console.log("register");
+        axios.post('http://172.30.11.64:5000/api/user/register',{
+            name,email,password,mobile
+        })
+          .then(function (response) {
+            if(response.data.flag===true){
+                navigation.replace('Home');
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
     }
     
     return (
@@ -64,9 +51,9 @@ const RegisterScreen = ( {navigation} ) => {
             <Input
                 placeholder='Enter your phone number'
                 label='Phone Number'
-                leftIcon={{ type: 'material', name: 'face' }}
-                value={phoneNumber}
-                onChangeText={text => setPhoneNumber(text)}
+                leftIcon={{ type: 'material', name: 'phone' }}
+                value={mobile}
+                onChangeText={text => setMobile(text)}
             />
             <Button title="register" style={styles.button} onPress = {register} />
         </View>

@@ -1,17 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import {Input, Button} from 'react-native-elements';
+import axios from 'axios';
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const signIn = () => {
-        // auth.signInWithEmailAndPassword(email, password)
-        // .catch((error) => {
-        //     var errorMessage = error.message;
-        //     alert(errorMessage)
-        // });
-        console.log("sign in");
+        axios.post('http://172.30.11.64:5000/api/user/signin',{
+            email,password
+        })
+          .then(function (response) {
+            if(response.data.flag===true){
+                navigation.replace('Home');
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
     }
     // useEffect(() => {
     //     const unsubscribe = auth.onAuthStateChanged
