@@ -3,7 +3,9 @@ import { View, StyleSheet, Text } from 'react-native'
 import {Input, Button} from 'react-native-elements';
 import axios from 'axios';
 
-const StartTrackingScreen = ({navigation}) => {
+const StartTrackingScreen = ({navigation, route}) => {
+    const user = route.params.user;
+    const group = route.params.group
     const [safetyDistance, setSafetyDistance] = useState('');
     const members = [
         {
@@ -29,7 +31,7 @@ const StartTrackingScreen = ({navigation}) => {
       ];
     return (
         <View style={styles.container}>
-            <Text>Group Name</Text>
+            <Text style={styles.titleText}>{group.name} {"\n"}</Text>
             <Input
                 placeholder='Enter Safety Distance'
                 label='Safety Distance'
@@ -38,7 +40,8 @@ const StartTrackingScreen = ({navigation}) => {
                 onChangeText={text => setSafetyDistance(text)}
             />
             <Button title="Start Tracking" style={styles.button} onPress= {()=>navigation.navigate('Tracking')}/>
-            {members.map((member) => {
+            <Text style={styles.secondText}>{"\n"}{"\n"}Members</Text>
+            {group.members.map((member) => {
                 return (
                 <View>
                     <Text style={styles.item}>{member.name}</Text>
@@ -60,10 +63,20 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     item: {
-        padding: 20,
+        padding: 10,
         fontSize: 15,
-        marginTop: 5,
-      }
+        marginTop: 10,
+      },
+    titleText: {
+      fontSize: 40,
+      fontWeight: "bold",
+      textDecorationLine: 'underline'
+    },
+    secondText: {
+      fontSize: 20,
+      fontWeight: "bold",
+      textDecorationLine: 'underline'
+    }
 })
 
 export default StartTrackingScreen;
