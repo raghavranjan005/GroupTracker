@@ -64,7 +64,7 @@ const RegisterScreen = ( {navigation} ) => {
             <Input
                 placeholder='Enter your phone number'
                 label='Phone Number'
-                leftIcon={{ type: 'material', name: 'face' }}
+                leftIcon={{ type: 'material', name: 'phone' }}
                 value={phoneNumber}
                 onChangeText={text => setPhoneNumber(text)}
             />
