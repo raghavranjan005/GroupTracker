@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose")
 
 const groupSchema = new mongoose.Schema({
     users:[],
@@ -16,4 +16,4 @@ const userSchema = new mongoose.Schema({
 
 const userModel = mongoose.model("User", userSchema);
 
-export default userModel;
+module.exports = userModel; 
