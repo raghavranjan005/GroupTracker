@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     mobile:{type:String, required:true},
     lattitude:{type:String},
     longitude:{type:String},
-    groups:[{type: mongoose.Schema.Types.ObjectId}],
+    groups:[],
 })
 
 const userModel = mongoose.model("User", userSchema);

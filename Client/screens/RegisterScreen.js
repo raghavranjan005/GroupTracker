@@ -11,7 +11,7 @@ const RegisterScreen = ( {navigation} ) => {
     const [mobile, setMobile] = useState('');
 
     var register = () => {
-        axios.post('http://172.30.11.64:5000/api/user/register',{
+        axios.post('http://10.23.0.138:5000/api/user/register',{
             name,email,password,mobile
         })
           .then(function (response) {

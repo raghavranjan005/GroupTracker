@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
 
     const signIn = () => {
-        axios.post('http://172.30.11.64:5000/api/user/signin',{
+        axios.post('http://10.23.0.138:5000/api/user/signin',{
             email,password
         })
           .then(function (response) {
