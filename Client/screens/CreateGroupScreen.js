@@ -1,15 +1,38 @@
 import React, {useEffect, useState} from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet,Text} from 'react-native'
+import * as Clipboard from 'expo-clipboard';
 import {Input, Button} from 'react-native-elements';
 import axios from 'axios';
 
 
-const CreateGroupScreen = ({navigation}) => {
+const CreateGroupScreen = ({navigation,route}) => {
 
+    // console.log(route.params);
+    const user = route.params.user;
     const [groupName, setGroupName] = useState('');
+    const [groupId, setGroupId] = useState("");
+
+
     const createGroup = () =>{
-        navigation.replace('Home');
+        axios.post('http://10.23.0.138:5000/api/group/create',{
+            name:groupName,
+            _id:user._id
+        })
+          .then(function (response) {
+            if(response.data.flag===true){
+                console.log(response.data);
+                setGroupId(response.data.groupId);
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
     }
+    
+    const copy = () =>{
+        Clipboard.setString(groupId);
+    }
+
     return (
         <View style={styles.container}>
             <Input
@@ -20,6 +43,13 @@ const CreateGroupScreen = ({navigation}) => {
                 onChangeText={text => setGroupName(text)}
             />
             <Button title="Create Group" style={styles.button} onPress = {createGroup} />
+            {groupId !=="" ? <View style={styles.container}>
+            <Text> Group Created Succesfully and You are added to that.{"\n"}
+             Send this code to friends to add them in group{"\n"}{"\n"} </Text>
+                <Text style={styles.titleText}>{groupId}{"\n"}{"\n"}</Text>
+            <Button title="Copy to Clipboard" style={styles.button} onPress = {copy}></Button>
+            </View>:null
+            }
         </View>
     );
 }
@@ -33,7 +63,11 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10
-    }
+    },
+    titleText: {
+        fontSize: 20,
+        fontWeight: "bold"
+      }
 })
 
 export default CreateGroupScreen;

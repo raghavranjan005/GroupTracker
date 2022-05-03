@@ -51,14 +51,11 @@ router.post('/create', async (req, res) => {
           const group = await Group.findOne({
             groupId: req.body.groupId
           })
-          const memb = group.members;
-          memb.push(
-              {
+          const memb = {
                   "userId":user._id,
                   "name":user.name,
                   "email":user.email
               }
-          );
             group.members.push(memb);
             const savedGroup = await group.save();
             user.groups.push(savedGroup);

@@ -13,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
         })
           .then(function (response) {
             if(response.data.flag===true){
-                navigation.replace('Home');
+                navigation.replace('Home',{user: response.data.user});
             }
           })
           .catch(function (error) {

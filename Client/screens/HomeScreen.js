@@ -5,8 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {Input, Button} from 'react-native-elements';
 
-const HomeScreen = ({navigation})=> {
+const HomeScreen = ({navigation, route})=> {
 
+  console.log(route.params);
+  const user = route.params.user;
   const [tick,setTick] = useState(0);
 
 
@@ -22,6 +24,14 @@ const HomeScreen = ({navigation})=> {
 // //           })
     
 // // }, 5000);
+  var createGrp = () => {
+    navigation.replace('CreateGroup',{user:user});
+  }
+
+  var joinGrp = () => {
+    navigation.replace('JoinGroup',{user:user});
+  }
+
 
   useEffect(() => {
   });
@@ -29,27 +39,9 @@ const HomeScreen = ({navigation})=> {
 
   return (
     <View style={styles.container}>
-      <View style={styles.description}>
-        <Text style={styles.descriptionContent1}>
-          Hi Name
-        </Text>
-        <Text style={styles.descriptionContent2}>
-          Your Coordinates : 192.12312, 3124.434324
-        </Text>
-      </View>
-
-      <View style = {styles.options}>
-        <Button title="Create Group" style={styles.button}/>
-        <Button title="Join Group" style={styles.button} />
-      </View>
-
-      <View style={styles.heading}>
-        <Text style={styles.descriptionContent1}>
-          My Groups
-        </Text>
-      </View>
-
-
+      <Text>home</Text>
+      <Button title="Create Group" style={styles.button} onPress = {createGrp}></Button>
+      <Button title="Join Group"style={styles.button} onPress = {joinGrp}></Button>
       <StatusBar style="auto" />
     </View>
   );
