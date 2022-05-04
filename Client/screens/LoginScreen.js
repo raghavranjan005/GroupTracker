@@ -53,6 +53,7 @@ const LoginScreen = ({ navigation }) => {
                 secureTextEntry
             />
             <Button title="login" style={styles.button} onPress = {signIn} />
+            <Text>{"\n"}</Text>
             <Button title="register" style={styles.button} onPress= {()=>navigation.navigate('Register')}/>
         </View>
     )

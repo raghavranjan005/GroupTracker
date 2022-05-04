@@ -93,7 +93,7 @@ router.post('/create', async (req, res) => {
 
   router.post('/track', async (req, res) => {
     try {  
-        console.log(req.body._id,req.body.location);
+        console.log("req body location",req.body.location);
           const user = await User.findOne({
             _id: req.body._id,
           });
@@ -149,7 +149,7 @@ router.post('/create', async (req, res) => {
             distances.push(dist);    
           }
 
-          return res.send(distances);
+          return res.send({alarm,distances});
 
     } catch (error) {
       console.log(error);

@@ -9,7 +9,18 @@ const JoinGroupScreen = ({navigation,route}) => {
     const user = route.params.user;
     const [groupCode, setGroupCode] = useState('');
     const [flag, setFlag] = useState(false)
-
+    const goHome = ()=>{
+        axios.post('http://10.23.0.138:5000/api/user/getuser',{
+            email:user.email
+        })
+          .then(function (response) {
+            navigation.replace("Home", {user:response.data})
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        
+    }
     const joinGroup = () =>{
         axios.post('http://10.23.0.138:5000/api/group/join',{
             groupId:groupCode,
@@ -35,10 +46,11 @@ const JoinGroupScreen = ({navigation,route}) => {
                 onChangeText={text => setGroupCode(text)}
             />
             <Button title="Join Group" style={styles.button} onPress = {joinGroup} />
-
             {flag == true ? <View style={styles.container}>
                 <Text> Joined Group Succesfully</Text>
             </View>:null}
+            <Text>{"\n"}</Text>
+            <Button title="Back To Home" style={styles.button} onPress = {goHome} />
 
         </View>
         

@@ -14,7 +14,18 @@ const TrackingScreen = ({navigation,route}) => {
   const safetyDistance = route.params.safetyDistance;
   const [location, setLocation] = useState(loc);
   const [distance, setDistance] = useState([]);
-  
+  const goHome = ()=>{
+    axios.post('http://10.23.0.138:5000/api/user/getuser',{
+        email:user.email
+    })
+      .then(function (response) {
+        navigation.replace("Home", {user:response.data})
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    
+    }
     useEffect(() => {
       setLocation(loc)
       function getDist() {
@@ -23,7 +34,7 @@ const TrackingScreen = ({navigation,route}) => {
         })
           .then(function (response) {
            console.log(response.data);
-           setDistance(response.data);
+           setDistance(response.data.distances);
           })
           .catch(function (error) {
             console.log(error);
@@ -85,6 +96,8 @@ const TrackingScreen = ({navigation,route}) => {
                 </View>
                 );
             })}
+            <Text>{"\n"}</Text>
+            <Button title="Back To Home" style={styles.button} onPress = {goHome} />
         </View>
     );
 }

@@ -12,7 +12,18 @@ const CreateGroupScreen = ({navigation,route}) => {
     const [groupName, setGroupName] = useState('');
     const [groupId, setGroupId] = useState("");
 
-
+    const goHome = ()=>{
+        axios.post('http://10.23.0.138:5000/api/user/getuser',{
+            email:user.email
+        })
+          .then(function (response) {
+            navigation.replace("Home", {user:response.data})
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        
+    }
     const createGroup = () =>{
         axios.post('http://10.23.0.138:5000/api/group/create',{
             name:groupName,
@@ -50,6 +61,8 @@ const CreateGroupScreen = ({navigation,route}) => {
             <Button title="Copy to Clipboard" style={styles.button} onPress = {copy}></Button>
             </View>:null
             }
+            <Text>{"\n"}</Text>
+            <Button title="<- Back To Home" style={styles.button} onPress = {goHome} />
         </View>
     );
 }

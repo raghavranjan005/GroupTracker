@@ -7,7 +7,18 @@ const StartTrackingScreen = ({navigation, route}) => {
     const user = route.params.user;
     const group = route.params.group
     const [safetyDistance, setSafetyDistance] = useState('');
-
+    const goHome = ()=>{
+      axios.post('http://10.23.0.138:5000/api/user/getuser',{
+          email:user.email
+      })
+        .then(function (response) {
+          navigation.replace("Home", {user:response.data})
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+      
+  }
     const StartTracking=()=>{
       navigation.replace("Tracking",{
         user:user,
@@ -36,6 +47,10 @@ const StartTrackingScreen = ({navigation, route}) => {
                 </View>
                 );
             })}
+            <Text>{"\n"}</Text>
+            <Text>{"\n"}</Text>
+            <Button title="Back To Home" style={styles.button} onPress = {goHome} />
+            
         </View>
     );
 }

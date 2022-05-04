@@ -8,6 +8,22 @@ const bcryptsalt = 8;
 
 const router = express.Router();
 
+router.post('/getuser', async (req, res) => {
+  try {
+      const user = await User.findOne({ email: req.body.email });
+      if (user) {
+        res.send(user);
+      }
+        return res.status(401).send({ message: 'Invalid Email or Password.' });
+    
+  } catch (error) {
+      return res.send(error);
+  }
+    
+  });
+
+
+
 router.post('/register', async (req, res) => {
     try {
       
