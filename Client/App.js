@@ -12,7 +12,7 @@ import TrackingScreen from './screens/TrackingScreen';
 
 
 const Stack = createStackNavigator();
-
+console.disableYellowBox = true;
 export default function App() {
   return (
     <NavigationContainer>
