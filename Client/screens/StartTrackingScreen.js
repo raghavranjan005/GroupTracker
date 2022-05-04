@@ -7,28 +7,16 @@ const StartTrackingScreen = ({navigation, route}) => {
     const user = route.params.user;
     const group = route.params.group
     const [safetyDistance, setSafetyDistance] = useState('');
-    const members = [
-        {
-          id: "1",
-          name: "Earnest Green",
-        },
-        {
-          id: "2",
-          name: "Winston Orn",
-        },
-        {
-          id: "3",
-          name: "Carlton Collins",
-        },
-        {
-          id: "4",
-          name: "Malcolm Labadie",
-        },
-        {
-          id: "5",
-          name: "Michelle Dare",
-        },
-      ];
+
+    const StartTracking=()=>{
+      navigation.replace("Tracking",{
+        user:user,
+        group:group,
+        safetyDistance:safetyDistance
+      })
+    }
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>{group.name} {"\n"}</Text>
@@ -39,7 +27,7 @@ const StartTrackingScreen = ({navigation, route}) => {
                 value={safetyDistance}
                 onChangeText={text => setSafetyDistance(text)}
             />
-            <Button title="Start Tracking" style={styles.button} onPress= {()=>navigation.navigate('Tracking')}/>
+            <Button title="Start Tracking" style={styles.button} onPress= {StartTracking}/>
             <Text style={styles.secondText}>{"\n"}{"\n"}Members</Text>
             {group.members.map((member) => {
                 return (

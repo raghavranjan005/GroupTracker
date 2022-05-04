@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     email:{type:String, required:true, trim:true, unique:true, dropDups: true},
     password:{type:String, required:true},
     mobile:{type:String, required:true},
-    lattitude:{type:String},
-    longitude:{type:String},
+    latitude:{type:Number},
+    longitude:{type:Number},
     groups:[],
 })
 

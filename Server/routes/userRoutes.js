@@ -16,13 +16,14 @@ router.post('/register', async (req, res) => {
           });
 
           console.log("dsfsdf",registerUser);
-          if(!registerUser){
-            
+          if(!registerUser){ 
                 const user = new User({
                 name: req.body.name,
                 email: req.body.email,
                 password: bcrypt.hashSync(req.body.password, 8),
                 mobile:req.body.mobile,
+                longitude:0,
+                latitude:0,
                 });
     
             const newUser = await user.save();
@@ -66,5 +67,23 @@ router.post('/register', async (req, res) => {
     }
       
     });
+
+
+    router.post('/savelocation', async (req, res) => {
+      try {
+        // console.log("hetre")
+          const user = await User.findOne({ email: req.body.email });
+          user.longitude = req.body.location.longitude;
+          user.latitude = req.body.location.latitude;
+          const updatedUser = await user.save();
+          // console.log(updatedUser);
+          return res.send(updatedUser);
+
+      } catch (error) {
+          return res.send(error);
+      }
+        
+      });
+
 
     module.exports = router; 

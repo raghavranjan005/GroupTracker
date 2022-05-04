@@ -4,59 +4,14 @@ import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {Input, Button} from 'react-native-elements';
+import useLocation from "../hooks/useLocation";
  
 const HomeScreen = ({navigation, route})=> {
  
+  const [location, setLocation] = useState({});
+  const loc = useLocation();
   const user = route.params.user;
-  const members = [
-    {
-      id: "1",
-      name: "Earnest Green",
-      latitude : "9999",
-      longitude : "9999",
-    },
-    {
-      id: "2",
-      name: "Winston Orn",
-      latitude : "9999",
-      longitude : "9999",
-    },
-    {
-      id: "3",
-      name: "Carlton Collins",
-      latitude : "9999",
-      longitude : "9999",
-    },
-    {
-      id: "4",
-      name: "Malcolm Labadie",
-      latitude : "9999",
-      longitude : "9999",
-    },
-    {
-      id: "5",
-      name: "Michelle Dare",
-      latitude : "9999",
-      longitude : "9999",
-    },
-  ];
  
-  const [tick,setTick] = useState(0);
- 
- 
-//   setInterval(function(){ 
-// //     const t = tick;
-// //     axios.post('http://10.23.0.138:5000/api/product/create',{"t":t})
-// //           .then(function (response) {
-// //             // console.log(response);
-// //             setTick(response.data.tick);
-// //           })
-// //           .catch(function (error) {
-// //             console.log(error);
-// //           })
-    
-// // }, 5000);
-
   const createGrp=()=>{
     navigation.replace("CreateGroup",{user:user})
   }
@@ -66,12 +21,27 @@ const HomeScreen = ({navigation, route})=> {
   }
 
   const enterGrp=(group)=>{
-    navigation.replace("StartTracking",{user:user,group:group})
+    axios.post('http://10.23.0.138:5000/api/group/details',{
+            _id:group._id
+        })
+          .then(function (response) {
+              navigation.replace("StartTracking",{user:user,group:response.data});
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
   }
  
   useEffect(() => {
+    setLocation(loc);
+    setInterval(function(){ 
+      setLocation(loc);
+  }, 5000);
   });
  
+  const [lattitude, setLattitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
  
   return (
  
@@ -82,7 +52,7 @@ const HomeScreen = ({navigation, route})=> {
           {user.name}
         </Text>
         <Text style={styles.descriptionContent2}>
-          Your Coordinates : 192.12312, 3124.434324
+          Your Coordinates : {JSON.stringify(location)}
         </Text>
       </View>
  
